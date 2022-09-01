@@ -6,15 +6,6 @@ class Point {
   }
 }
 
-class Rectangle {
-  constructor(x, y, w, h) {
-    this.x = x; // center
-    this.y = y;
-    this.w = w; // half width
-    this.h = h; // half height
-  }
-}
-
 class Cube {
   constructor(x, y, z, w, h, v) {
     this.x = x; // center
@@ -109,28 +100,114 @@ class Octree {
     this.southwestBack.insert(point);
   }
 
-  show() {
+  show(flag) {
     stroke(255);
     strokeWeight(1);
     noFill();
-    box(this.boundary.w, this.boundary.h, this.boundary.v);
 
+    let x = 0;
+    let y = 0;
+    let z = 0;
+
+    switch (flag) {
+      //Front
+      case 1:
+        x = this.boundary.w/2; 
+        y = -this.boundary.h/2;
+        z = this.boundary.v/2;
+        push();
+        translate(x, y, z)
+        box(this.boundary.w, this.boundary.h, this.boundary.v)
+        pop();
+        //translate(50,-50,50);
+        //box(100,100,100);
+        break;
+      case 2:
+        x = -this.boundary.w/2; 
+        y = -this.boundary.h/2;
+        z = this.boundary.v/2;
+        push();
+        translate(x, y, z)
+        box(this.boundary.w, this.boundary.h, this.boundary.v)
+        pop();
+        break;
+      case 3:
+        x = this.boundary.w/2; 
+        y = this.boundary.h/2;
+        z = this.boundary.v/2;
+         push();
+        translate(x, y, z)
+        box(this.boundary.w, this.boundary.h, this.boundary.v)
+        pop();
+        break;
+      case 4:
+        x = -this.boundary.w/2; 
+        y = this.boundary.h/2;
+        z = this.boundary.v/2;
+        push();
+        translate(x, y, z)
+        box(this.boundary.w, this.boundary.h, this.boundary.v)
+        pop();
+        break;
+      //Back
+      case 5:
+        x = this.boundary.w/2; 
+        y = -this.boundary.h/2;
+        z = -this.boundary.v/2;
+        push();
+        translate(x, y, z)
+        box(this.boundary.w, this.boundary.h, this.boundary.v)
+        pop();
+        break;
+      case 6:
+        x = -this.boundary.w/2; 
+        y = -this.boundary.h/2;
+        z = -this.boundary.v/2;
+        push();
+        translate(x, y, z)
+        box(this.boundary.w, this.boundary.h, this.boundary.v)
+        pop();
+        break;
+      case 7:
+        x = this.boundary.w/2; 
+        y = this.boundary.h/2;
+        z = -this.boundary.v/2;
+        push();
+        translate(x, y, z)
+        box(this.boundary.w, this.boundary.h, this.boundary.v)
+        pop();
+        break;
+      case 8:
+        x = -this.boundary.w/2; 
+        y = this.boundary.h/2;
+        z = -this.boundary.v/2;
+        push();
+        translate(x, y, z)
+        box(this.boundary.w, this.boundary.h, this.boundary.v)
+        pop();
+        break;
+      default:
+        box(this.boundary.w, this.boundary.h, this.boundary.v)
+        //box(200, 200, 200);
+        break;
+    }
+    
     if (this.divided) {
-      this.northeastFront.show();
-      this.northwestFront.show();
-      this.southeastFront.show();
-      this.southwestFront.show();
+      //  this.northeastFront.show(1);
+      //  this.northwestFront.show(2);
+      //  this.southeastFront.show(3);
+      //  this.southwestFront.show(4);
 
-      this.northeastBack.show();
-      this.northwestBack.show();
-      this.southeastBack.show();
-      this.southwestBack.show();
+       this.northeastBack.show(5);
+       this.northwestBack.show(6);
+       this.southeastBack.show(7);
+       this.southwestBack.show(8);
     }
 
-    for (let p of this.points) {
-      strokeWeight(5);
-      point(p.x, p.y, p.z);
-    }
+    // for (let p of this.points) {
+    //   strokeWeight(5);
+    //   point(p.x, p.y, p.z);
+    // }
   }
 
   query(range, found) {
