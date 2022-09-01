@@ -4,12 +4,12 @@ let count = 0;
 function setup() {
   createCanvas(400, 400, WEBGL);
   // centre point and half of width and height
-  let boundary = new Cube(100, 100, 100, 100, 100, 100);
+  let boundary = new Cube(200, 200, 200, 200, 200, 200);
   // each leave just could have 4 elements
   qt = new Octree(boundary, 4);
 
   console.log(qt);
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 9; i++) {
     let p = new Point(Math.random() * 50, Math.random() * 50, Math.random() * 50);
     qt.insert(p);
   }
